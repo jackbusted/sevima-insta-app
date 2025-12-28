@@ -1,0 +1,17 @@
+[
+    {
+        "name": "admin",
+        "display_name": "Admin",
+        "group": "Administrator"
+    },
+    {
+        "name": "panitia",
+        "display_name": "Panitia",
+        "group": "Panitia"
+    },
+    {
+        "name": "user",
+        "display_name": "User",
+        "group": "Peserta"
+    }
+]

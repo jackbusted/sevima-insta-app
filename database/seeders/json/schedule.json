@@ -1,0 +1,44 @@
+[
+	{
+		"class_test" : "Kelas A",
+		"open_date" : "2023-09-27",
+		"execution" : "Pagi",
+		"exe_clock" : "09:00:00",
+		"status" : 3
+	},
+	{
+		"class_test" : "Kelas B",
+		"open_date" : "2023-10-05",
+		"execution" : "Siang",
+		"exe_clock" : "13:30:00",
+		"status" : 2
+	},
+	{
+		"class_test" : "Kelas C",
+		"open_date" : "2024-02-06",
+		"execution" : "Pagi",
+		"exe_clock" : "09:00:00",
+		"status" : 1
+	},
+	{
+		"class_test" : "Kelas A",
+		"open_date" : "2024-02-15",
+		"execution" : "Pagi",
+		"exe_clock" : "09:00:00",
+		"status" : 1
+	},
+	{
+		"class_test" : "Kelas B",
+		"open_date" : "2024-02-27",
+		"execution" : "Siang",
+		"exe_clock" : "13:30:00",
+		"status" : 1
+	},
+	{
+		"class_test" : "Kelas C",
+		"open_date" : "2024-03-04",
+		"execution" : "Malam",
+		"exe_clock" : "19:00:00",
+		"status" : 0
+	}
+]
