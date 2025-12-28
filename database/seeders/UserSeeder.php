@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        /* User::create([
+        User::create([
             'name' => 'Satrio Kaget',
             'username' => 'satriop98',
             'email' => 'satrio@gmail.com',
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'role_id' => '3',
         ]);
 
-        User::create([
+        /* User::create([
             'name' => 'Mutia Radio',
             'username' => 'mutiabot',
             'email' => 'mutia@gmail.com',
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             'email' => 'tretan@gmail.com',
             'password' => bcrypt('123456'),
             'role_id' => '3',
-        ]); */
+        ]);
 
         User::create([
             'name' => 'Kevin Ketimun Laut',
@@ -61,20 +61,20 @@ class UserSeeder extends Seeder
             'email' => 'kevin@gmail.com',
             'password' => bcrypt('123456'),
             'role_id' => '3',
-        ]);
+        ]); */
 
         User::create([
             'name' => 'Admin',
             'username' => 'admin',
-            'email' => 'admin@tefl.com',
-            'password' => bcrypt('tefl@itats2024'),
+            'email' => 'admin@sevima.com',
+            'password' => bcrypt('123456'),
             'role_id' => '1',
         ]);
 
         /* User::create([
             'name' => 'Panitia',
             'username' => 'panitia',
-            'email' => 'panitia@tefl.com',
+            'email' => 'panitia@sevima.com',
             'password' => bcrypt('123456'),
             'role_id' => '2',
         ]);
