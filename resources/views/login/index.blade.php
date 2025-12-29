@@ -9,7 +9,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
         <div class="login-wrap m-50">
-            <h3 class="mb-4 text-center">Account Login</h3>
+            <h3 class="mb-4 text-center" style="color: #123524">Account Login</h3>
             @if(session('loginError'))
                 <div class="alert alert-danger">
                     {{ session('loginError') }}
@@ -26,19 +26,8 @@
                 <div class="form-group">
                     <button type="submit" class="form-control btn btn-primary submit px-3">Login</button>
                 </div>
-                {{-- <div class="form-group d-md-flex">
-                    <div class="w-50">
-                        <label class="checkbox-wrap checkbox-primary">Remember Me
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="w-50 text-md-right">
-                        <a href="#" style="color: #fff">Forgot Password</a>
-                    </div>
-                </div> --}}
             </form>
-            <p class="w-100 text-center">&mdash; Don't Have Account? &mdash;</p>
+            <p class="w-100 text-center" style="color: #123524">&mdash; Don't Have Account? &mdash;</p>
             <div class="social d-flex text-center">
                 <a 
                     href="/register"
@@ -46,7 +35,7 @@
                     <span class="ion-logo-facebook mr-2"></span>Register
                 </a>
             </div>
-            <p style="color: #fff" class="mt-5 mb-3 text-center">&copy; 2024 ITATS's TEFL</p>
+            <p style="color: #123524" class="mt-5 mb-3 text-center">&copy; 2025 Satrio Production</p>
         </div>
     </div>
 </div>

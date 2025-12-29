@@ -5,13 +5,13 @@
         "group": "Administrator"
     },
     {
-        "name": "panitia",
-        "display_name": "Panitia",
-        "group": "Panitia"
+        "name": "superadmin",
+        "display_name": "Superadmin",
+        "group": "Administrator"
     },
     {
         "name": "user",
         "display_name": "User",
-        "group": "Peserta"
+        "group": "Users"
     }
 ]

@@ -9,7 +9,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
         <div class="login-wrap m-50">
-            <h3 class="mb-4 text-center">Account Register</h3>
+            <h3 class="mb-4 text-center" style="color: #123524">Account Register</h3>
             <form method="post" class="signin-form" id="register-form">
                 @csrf
                 <div class="form-group">
@@ -28,7 +28,7 @@
                     <button id="btn-register" type="submit" class="form-control btn btn-primary submit px-3">Register</button>
                 </div>
             </form>
-            <p class="w-100 text-center">&mdash; Have An Account? &mdash;</p>
+            <p class="w-100 text-center" style="color: #123524">&mdash; Have An Account? &mdash;</p>
             <div class="social d-flex text-center">
                 <a 
                     href="/login"
@@ -36,7 +36,7 @@
                     <span class="ion-logo-facebook mr-2"></span>Login
                 </a>
             </div>
-            <p style="color: #fff" class="mt-5 mb-3 text-center">&copy; 2024 ITATS's TEFL</p>
+            <p style="color: #123524" class="mt-5 mb-3 text-center">&copy; 2025 Satrio Production</p>
         </div>
     </div>
 </div>

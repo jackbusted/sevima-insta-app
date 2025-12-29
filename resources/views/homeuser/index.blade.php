@@ -2,178 +2,287 @@
 
 @section('container')
 <style>
-    .feature-icon {
-        width: 4rem;
-        height: 4rem;
-        border-radius: .75rem;
+    .post-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
     }
 
-    .icon-square {
-        width: 3rem;
-        height: 3rem;
-        border-radius: .75rem;
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid #ddd;
     }
 
-    .icon-image {
-        width: 2rem;
-        height: 2rem;
-        border-radius: .75rem;
-    }
-
-    .text-shadow-1 {
-        text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25);
-    }
-
-    .text-shadow-2 {
-        text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25);
-    }
-
-    .text-shadow-3 {
-        text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25);
-    }
-
-    .card-cover {
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-    }
-
-    .feature-icon-small {
-        width: 3rem;
-        height: 3rem;
+    .post-image {
+        width: 100%;
+        margin-top: 5px;
     }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pl-3 pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Welcome, {{ auth()->user()->name }}</h1>
 </div>
 
-<div id="hanging-icons">
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div id="schedule-notice" style="display: none;">
-            <div class="col d-flex align-items-start">
-                <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check-fill icon-image" viewBox="0 0 16 16">
-                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="fs-2 text-body-emphasis">Schedule</h3>
-                    <p>You have registered for the exam schedule</p>
-                    <p id="exam-date"></p>
-                    <p id="exam-time"></p>
-                    <p id="register-status">
-                        Status : <span id="status-badge" class="badge"></span>
-                    </p>
-                </div>
+<form action="{{ route('homeuser.posts.new-feed') }}" method="post" id="form-post-feed" enctype="multipart/form-data">
+    @csrf
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="mb-3">
+                <label for="caption" class="form-label">Post your experience</label>
+                <input type="text" class="form-control" id="caption" name="caption" value="">
             </div>
-        </div>
-        <div id="incoming-notice" style="display: none;">
-            <div class="col d-flex align-items-start">
-                <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm-fill icon-image" viewBox="0 0 16 16">
-                        <path d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5m2.5 5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.04 8.04 0 0 0 .86 5.387M11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.04 8.04 0 0 0-3.527-3.527"/>
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="fs-2 text-body-emphasis" id="incoming-title"></h3>
-                    <p id="incoming-message"></p>
-                    <p id="incoming-date"></p>
-                    <p id="incoming-time"></p>
-                    @if ($joinUrl != null)
-                        <a href="{{ $joinUrl }}" target="_blank" class="btn btn-primary">
-                            Join Zoom
-                        </a>
-                    @endif
-                </div>
+            <div class="mb-3" id="imagePreview" style="display: none;">
+                <a href="" id="imageBoxPreview" data-baguettebox>
+                    <img class="img-preview img-fluid mb-3 col-sm-5" id="imagePreviewTag">
+                </a>
             </div>
-        </div>
-        <div id="profile-notice" style="display: none;">
-            <div class="col d-flex align-items-start">
-                <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-square-fill icon-image" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="fs-2 text-body-emphasis">Fill NPM</h3>
-                    <p>Please complete your profile</p>
-                    <a href="{{ URL::route('homeuser.setting-user') }}" class="btn btn-primary">
-                        Set up
-                    </a>
-                </div>
+            <div class="mb-3">
+                <input type="file" class="form-control" id="post-image" name="post-image" accept=".jpeg,.jpg,.png" onchange="previewImage()">
             </div>
+            <button id="post-feed" type="submit" class="btn btn-primary mr-2">Post</button>
         </div>
     </div>
+</form>
+
+<br><br>
+
+<div id="feed">
+    @foreach ($data as $post)
+        <div class="post" data-id="{{ $post->id }}">
+            <div class="post-header">
+                <img
+                    src="{{ $post->user->avatar
+                        ? asset($post->user->avatar)
+                        : asset('images/logo.png') }}"
+                    class="avatar"
+                >
+                <strong>{{ $post->user->username }}</strong>
+            </div>
+            <img src="{{ asset($post->image) }}" width="100%">
+            <p>{{ $post->caption }}</p>
+
+            <button class="btn-like" data-id="{{ $post->id }}" onclick="handleClickLike('{{ $post->id }}')">
+                @if ($post->isLikedBy(auth()->id()))
+                    ❤️
+                @else
+                    🤍
+                @endif
+                <span class="like-count">{{ $post->likes_count }}</span>
+            </button>
+
+            <div class="comments">
+                @foreach ($post->comments as $comment)
+                    <p>
+                        <b>{{ $comment->user->username }}</b>
+                        {{ $comment->content }}
+                    </p>
+                @endforeach
+            </div>
+
+            <input
+                type="text"
+                class="comment-input"
+                data-id="{{ $post->id }}"
+                onkeydown="handleCommentKey(event, '{{ $post->id }}')"
+                placeholder="Add a comment..."
+            >
+        </div>
+        <br><br>
+    @endforeach
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
-    @if (isset($showScheduleNotice))
-        var show = false;
-        show = {!! json_encode($showScheduleNotice) !!}
-        if (show) {
-            const scheduleNotice = document.getElementById('schedule-notice');
-            scheduleNotice.style.display = 'block';
+    let cursor = "{{ $data->count() > 0 ? $data->last()->id : null }}";
+    let loading = false;
+    let hasMore = true;
 
-            let rawDate = {!! json_encode($date) !!}
-            let rawTime = {!! json_encode($time) !!}
-            let formattedDate = formatDate(rawDate);
-            let formatteTime = formatTime(rawTime);
-            let status = {!! json_encode($paymentStatus) !!}
-            let statusBadge = $("#status-badge");
+    const loader = document.getElementById('loader');
 
-            $("#exam-date").text('Date : '+formattedDate);
-            $("#exam-time").text('Time : '+formatteTime+" wib")
-            if (status === "Confirmed") {
-                statusBadge.text("Confirmed");
-                statusBadge.addClass("badge-success");
-            } else if (status === "Rejected") {
-                statusBadge.text("Rejected");
-                statusBadge.addClass("badge-danger");
-            } else {
-                statusBadge.text(status);
-                statusBadge.addClass("badge-secondary");
+    const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !loading && hasMore) {
+            loadMore();
+        }
+    });
+
+    observer.observe(loader);
+
+    async function loadMore() {
+        loading = true;
+        document.getElementById('loading').style.display = 'block';
+
+        const res = await fetch(`/homeuser/load-feed?cursor=${cursor}`);
+        const json = await res.json();
+
+        json.data.forEach(post => {
+            document.getElementById('feed').insertAdjacentHTML(
+                'beforeend',
+                renderPost(post)
+            );
+        });
+
+        cursor = json.next_cursor;
+        hasMore = json.has_more;
+
+        loading = false;
+        document.getElementById('loading').style.display = 'none';
+    }
+
+    function renderPost(post) {
+        let images = `<img src="${post.image}" width="100%">`;
+
+        return `
+            <div class="post">
+                <strong>${post.user.username}</strong>
+                ${images}
+                <p>${post.caption}</p>
+            </div>
+        `;
+    }
+
+    document.getElementById('post-feed').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(document.getElementById('form-post-feed'));
+        formData.append('_token', '{{ csrf_token() }}');
+
+        showLoading()
+        $.ajax({
+            url: "{{ URL::route('homeuser.posts.new-feed') }}",
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(resp) {
+                hideLoading()
+                location.reload();
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                hideLoading()
+                if (xhr.status === 422) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = '';
+
+                    $.each(errors, function(key, value) {
+                        errorMessage += value + ' ';
+                    });
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: errorMessage,
+                        showConfirmButton: true,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Something went wrong",
+                        text: xhr.responseJSON.message,
+                        showConfirmButton: true,
+                    });
+                }
             }
-        }
-    @endif
+        });
+    });
 
-    @if (isset($showIncomingNotice))
-        var show = false;
-        var isAlreadyStarted = false;
-        show = {!! json_encode($showIncomingNotice) !!}
-        isAlreadyStarted = {!! json_encode($isAlreadyStarted) !!}
-        if (show) {
-            const incomingNotice = document.getElementById('incoming-notice');
-            incomingNotice.style.display = 'block';
+    function previewImage() {
+        const image = document.querySelector('#post-image');
+        const imagePreviewDiv = document.querySelector('#imagePreview');
+        const imagePreviewTag = document.querySelector('#imagePreviewTag');
+        const preview = document.querySelector('#imageBoxPreview');
 
-            let rawDate = {!! json_encode($incomingDate) !!}
-            let rawTime = {!! json_encode($incomingTime) !!}
-            let formattedDate = formatDate(rawDate);
-            let formatteTime = formatTime(rawTime);
+        if (image.files && image.files[0]) {
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+            oFReader.onload = function(oFREvent) {
+                imagePreviewTag.src = oFREvent.target.result;
+                imagePreviewDiv.style.display = 'block';
 
-            if (isAlreadyStarted) {
-                $("#incoming-title").text('Already Started')
-                $('#incoming-message').text('Your exam is already started! Please join the room immediately!')
-                $("#incoming-date").text('Date : '+formattedDate)
-                $("#incoming-time").text('Time : '+formatteTime+" wib")
-            } else {
-                $("#incoming-title").text('Incoming Exam')
-                $('#incoming-message').text('You have incoming exam schedule.')
-                $("#incoming-date").text('Date : '+formattedDate)
-                $("#incoming-time").text('Time : '+formatteTime+" wib")
+                var formData = new FormData(document.getElementById('form-post-feed'));
+                formData.append('_token', '{{ csrf_token() }}');
+                $.ajax({
+                    url: "{{ URL::route('homeuser.posts.image-preview') }}",
+                    type: 'post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(resp) {
+                        var parsedResp = $.parseJSON(resp);
+                        var tempImagePreview = '{{ asset('') }}' + parsedResp.img_preview.image;
+                        preview.href = tempImagePreview
+                        baguetteBox.run('#imagePreview');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: xhr.statusText,
+                            text: xhr.responseJSON.message,
+                            showConfirmButton: true,
+                        });
+                    }
+                });
             }
+        } else {
+            imagePreviewTag.src = '';
+            imagePreviewDiv.style.display = 'none';
         }
-    @endif
+    }
 
-    @if (isset($showNpmNotice))
-        var show = false;
-        show = {!! json_encode($showNpmNotice) !!}
-        if (show) {
-            const profileNotice = document.getElementById('profile-notice');
-            profileNotice.style.display = 'block';
+    function handleClickLike(id) {
+        const btn = document.querySelector('.btn-like');
+
+        $.ajax({
+            url: `/homeuser/${id}/like`,
+            type: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}"
+            },
+            success: function (resp) {
+                btn.find('.like-count').text(resp.count);
+                btn.html((resp.liked ? '❤️ ' : '🤍 ') + `<span class="like-count">${resp.count}</span>`);
+                btn.append(`<span class="like-count">${resp.count}</span>`);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    function handleCommentKey(e, postId) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+
+            console.log("enter event")
+
+            const input = e.target;
+
+            if (input.value.trim() === '') return;
+
+            $.ajax({
+                url: `/homeuser/${postId}/comment`,
+                type: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    comment: input.value.trim()
+                },
+                success: function (resp) {
+                    $('#comments-' + postId)
+                        .append(`<p><b>${resp.username}</b> ${resp.comment}</p>`);
+                    input.value.trim()
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
         }
-    @endif
+    }
 
     function formatDate(dateString) {
         let date = new Date(dateString);

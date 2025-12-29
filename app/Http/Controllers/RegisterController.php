@@ -84,7 +84,6 @@ class RegisterController extends Controller
                 'active' => 'homeuser/setting-user',
                 'name' => $user->name,
                 'username' => $user->username,
-                'npm' => $user->npm,
                 'email' => $user->email,
                 'avatarImage' => $avatarImage,
             ]);
@@ -125,7 +124,6 @@ class RegisterController extends Controller
             $rules = [
                 'name' => 'required|min:6|max:255',
                 'username' => 'required|min:6|max:255',
-                'npm' => 'required|min:6|max:255',
                 'email' => [
                     'required',
                     'email',
@@ -171,12 +169,6 @@ class RegisterController extends Controller
                 return response()->json(['message' => 'This Username is already used by ' . $checkUsername->name], 400);
             }
 
-            $checkNpm = User::where('npm', $validatedData['npm'])->first();
-            if ($checkNpm && $checkNpm->id != $user_id) {
-                DB::rollBack();
-                return response()->json(['message' => 'This NPM is already used by ' . $checkNpm->name], 400);
-            }
-
             $checkEmail = User::where('email', $validatedData['email'])->first();
             if ($checkEmail && $checkEmail->id != $user_id) {
                 DB::rollBack();
@@ -197,7 +189,6 @@ class RegisterController extends Controller
 
             $user->name = $validatedData['name'];
             $user->username = $validatedData['username'];
-            $user->npm = $validatedData['npm'];
             $user->email = $validatedData['email'];
             if ($request->input('password') != "") {
                 $user->password = $validatedData['password'];

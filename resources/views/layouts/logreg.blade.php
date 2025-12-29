@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>ITATS's TEFL - {{ $title }}</title>
+        <title>Insta-App || {{ $title }}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('css/login/style.css') }}">
     </head>
 
-    <body class="img js-fullheight" style="background-image: url({{ asset('images/bg.jpg') }});">
+    <body class="img js-fullheight" style="background-color: #A1E3F9;">
         <section class="ftco-section">
             <div class="container pb-5">
                 <div class="row justify-content-center">

@@ -25,10 +25,6 @@
                 <input type="text" required class="form-control" name="username" id="username" value="{{ isset($username) ? $username : '' }}">
             </div>
             <div class="mb-3">
-                <label for="npm" class="form-label">NPM</label>
-                <input type="text" required class="form-control" name="npm" id="npm" value="{{ isset($npm) ? $npm : '' }}">
-            </div>
-            <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" required class="form-control" id="email" name="email" value="{{ isset($email) ? $email : '' }}">
             </div>

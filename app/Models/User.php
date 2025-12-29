@@ -31,7 +31,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'npm',
         'avatar',
         'updated_at',
     ];

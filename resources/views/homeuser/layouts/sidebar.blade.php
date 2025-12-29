@@ -1,10 +1,10 @@
 <style>
     #sidebar ul.list-unstyled li a {
-        text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+        text-decoration: none;
     }
 
     #sidebar ul.list-unstyled li.active a {
-        font-weight: bold; /* Jika Anda ingin memberi gaya khusus pada tautan aktif */
+        font-weight: bold;
     }
 </style>
 
@@ -24,16 +24,10 @@
         <li class="{{ Request::is('homeuser') ? 'active' : '' }}">
             <a class="nav-link d-flex gap-2" aria-current="page" href="/homeuser">
                 <i class="bi bi-house-fill"></i>
-                Dashboard
+                Home
             </a>
         </li>
-        {{-- <li class="{{ Request::is('homeuser/bind-zoom*') ? 'active' : '' }}">
-            <a class="nav-link d-flex gap-2" href="/homeuser/bind-zoom">
-                <img src="{{ asset('images/zoom-icon.png') }}" class="bi" alt="">
-                Bind To Zoom
-            </a>
-        </li> --}}
-        <li class="{{ Request::is('homeuser/test-registration*') ? 'active' : '' }}">
+        {{-- <li class="{{ Request::is('homeuser/test-registration*') ? 'active' : '' }}">
             <a class="nav-link d-flex gap-2" href="/homeuser/test-registration">
                 <i class="bi bi-file-earmark"></i>
                 Exam Registration
@@ -44,19 +38,19 @@
                 <i class="bi bi-cart"></i>
                 Exam's History
             </a>
-        </li>
+        </li> --}}
         <li class="{{ Request::is('homeuser/setting-user*') ? 'active' : '' }}">
             <a class="nav-link d-flex gap-2" href="/homeuser/setting-user">
                 <i class="bi bi-wrench"></i>
                 Setting Profile
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a class="nav-link d-flex gap-2" target="_blank" href="/homeuser/start-test">
                 <i class="bi bi-people"></i>
                 START EXAM
             </a>
-        </li>
+        </li> --}}
         <li>
             <form action="/logout" method="post">
                 @csrf
